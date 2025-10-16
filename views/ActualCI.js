@@ -3,17 +3,18 @@ import { StyleSheet, View, Modal, Text } from 'react-native';
 import { NavigationPress } from '../components/NavigationPress';
 import { globalStyles } from '../globalStyles';
 
-export const FichadaEnCurso = (props) => {
+export const ActualClockIn = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleClose = () => {
     setModalVisible(false);
-    props.nav('FichadaNueva');
+    props.nav();
   };
 
   return (
     <View style={globalStyles.view}>
-      <NavigationPress text="Finalizar Fichada" onPress={() => setModalVisible(true)} />
+      <Text style={globalStyles.textWhite}>Fichada en curso</Text>
+      <NavigationPress text="Finalizar" onPress={() => setModalVisible(true)} />
       <Modal
         animationType="slide"
         transparent={false}

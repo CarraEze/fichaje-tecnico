@@ -6,5 +6,11 @@ export const globalStyles = StyleSheet.create({
         alignItems: 'stretch',
         justifyContent: 'center',
         backgroundColor: "#000",
-    }
+    },
+    textWhite: {
+        color: '#fff',
+    },
+    textBlack: {
+        color: '#000',
+    },
 });
