@@ -1,11 +1,9 @@
 import { View, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { NavigationPress } from '../components/NavigationPress';
-import { supabase } from '../lib/supabase';
 
 export const NewClockIn = (props) => {
   const handlePress = () => {
-    console.log(data.user.id);
     props.nav();
   }
   

@@ -15,6 +15,9 @@ export default function Auth() {
       password: password,
     })
     if (error) {Alert.alert(error.message)}
+    else{  
+      const { data: { user } } = await supabase.auth.getUser()
+      console.log(user.id)}
     setLoading(false)
   }
 
