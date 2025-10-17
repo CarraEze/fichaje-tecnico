@@ -1,15 +1,18 @@
 import { View, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { NavigationPress } from '../components/NavigationPress';
+import { supabase } from '../lib/supabase';
 
 export const NewClockIn = (props) => {
-  const handlePress = () => { //esto lo hice así ya que recibía un error 
+  const handlePress = () => {
+    console.log(data.user.id);
     props.nav();
   }
+  
   return (
     <View>
-        <Text style={styles.text}>Nueva Fichada</Text>
-        <NavigationPress text="Comenzar" onPress={handlePress} />
+      <Text style={styles.text}>Nueva Fichada</Text>
+      <NavigationPress text="Comenzar" onPress={handlePress} />
     </View>
   )
 }
@@ -17,4 +20,5 @@ export const NewClockIn = (props) => {
 const styles = StyleSheet.create({
   text: {
     color: 'white'
-  }});
+  }
+});

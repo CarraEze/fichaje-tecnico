@@ -16,7 +16,8 @@
           "color": "#ffffff",
           "defaultChannel": "default"
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "splash": {
       "image": "./assets/splash-icon.png",

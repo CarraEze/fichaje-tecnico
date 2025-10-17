@@ -3,7 +3,6 @@ import 'react-native-url-polyfill/auto'
 import { ActualClockIn } from './views/ActualCI';
 import { LastClockOuts } from './views/LastCO';
 import { NewClockIn } from './views/NewCI';
-import { InicioSesion } from './lib/LogIn';
 
 import { useState, useCallback, useEffect } from 'react';
 import { globalStyles } from './globalStyles';
