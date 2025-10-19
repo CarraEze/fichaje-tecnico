@@ -9,24 +9,26 @@ import { globalStyles } from './globalStyles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Auth from './components/Auth'
-import { Session } from '@supabase/supabase-js'
 import { supabase } from './lib/supabase'
-import { LogOut } from './lib/LogOut';
 
 
 export default function App() {
-  const [actualView, setActualView] = useState('LastClockOuts');
+  const [actualView, setActualView] = useState('LastClockOutsView');
   const [session, setSession] = useState(null)
+  const [clockInTS, setClockInTS] = useState(null);
+  const [lastClockOuts, _setLastClockOuts] = useState([]);
+
+  const setLastClockOuts = (newClockOut) => {
+    if (lastClockOuts.length >= 5) {
+      _setLastClockOuts(lastClockOuts.slice(1).concat([newClockOut]));
+    } else {
+      _setLastClockOuts(lastClockOuts.concat([newClockOut]));
+    }
+  }
 
   const goActual = useCallback(() => setActualView('ActualClockIn'), [setActualView]);
-  const goUltimas = useCallback(() => setActualView('LastClockOuts'), [setActualView]);
+  const goUltimas = useCallback(() => setActualView('LastClockOutsView'), [setActualView]);
   const goNew = useCallback(() => setActualView('NewClockIn'), [setActualView]);
-
-  const views = {
-    ActualClockIn: <ActualClockIn nav={goUltimas} />,
-    LastClockOuts: <LastClockOuts nav={goNew} />,
-    NewClockIn: <NewClockIn nav={goActual} />
-  };
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -37,6 +39,16 @@ export default function App() {
     })
   }, [])
 
+  const views = {
+    ActualClockIn: <ActualClockIn
+      nav={goUltimas}
+      clockInTS={clockInTS}
+      //id_user={session.user.id} REVISAR ASINCRONISMO, ROMPE PORQUE SESSION ES NULL
+      setLastClockOuts={setLastClockOuts} />,
+    LastClockOutsView: <LastClockOuts nav={goNew} data={lastClockOuts}  />,
+    NewClockIn: <NewClockIn nav={goActual} setClockInTS={setClockInTS} />
+  };
+
   {
     return (
       <SafeAreaView style={globalStyles.view}>
@@ -45,16 +57,3 @@ export default function App() {
     );
   }
 }
-
-
-
-/*
-export default function App() {
-
-  return (
-    <View>
-      
-      
-    </View>
-  )
-}*/

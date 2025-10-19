@@ -3,7 +3,9 @@ import { StyleSheet } from 'react-native';
 import { NavigationPress } from '../components/NavigationPress';
 
 export const NewClockIn = (props) => {
+
   const handlePress = () => {
+    props.setClockInTS( new Date(Date.now()).toISOString());
     props.nav();
   }
   

@@ -1,12 +1,34 @@
 import { useState } from 'react';
-import { StyleSheet, View, Modal, Text } from 'react-native';
+import { StyleSheet, View, Modal, Text, TextInput } from 'react-native';
 import { NavigationPress } from '../components/NavigationPress';
 import { globalStyles } from '../globalStyles';
+import { supabase } from '../lib/supabase';
 
-export const ActualClockIn = (props) => {
+const sendCI = async (record) => { //funcion asincronica que se encarga de enviar al backend la info de la fichada
+  const { error } = await supabase
+    .from('clock_in')
+    .insert(record)
+  if (error) {
+    console.log('Error inserting data:', error);
+  } else {
+    props.setLAstClockOuts(record);
+  }
+}
+
+export const ActualClockIn = (props) => {  //componente que contiene la fichada actual
   const [modalVisible, setModalVisible] = useState(false);
+  const [movil, setMovil] = useState('');
 
-  const handleClose = () => {
+  const handleClose = () => {  //manejador para finalizar fichada
+    sendCI({
+      location: "pending",
+      geo_latitude: 1,
+      geo_longitude: 1,
+      id_user: props.session.user.id,
+      clock_in_ts: props.clockInTS,
+      clock_out_ts: new Date(Date.now()).toISOString(),
+      vehicle_id: movil
+    });
     setModalVisible(false);
     props.nav();
   };
@@ -14,6 +36,7 @@ export const ActualClockIn = (props) => {
   return (
     <View style={globalStyles.view}>
       <Text style={globalStyles.textWhite}>Fichada en curso</Text>
+      <TextInput placeholer="Movil" onChangeText={setMovil} value={movil}></TextInput>
       <NavigationPress text="Finalizar" onPress={() => setModalVisible(true)} />
       <Modal
         animationType="slide"

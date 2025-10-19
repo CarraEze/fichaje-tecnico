@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 
 export const RegTable = (props) => {
   return (
@@ -7,7 +7,12 @@ export const RegTable = (props) => {
         <Text style={styles.header}>{props.title}</Text>
       </View>
       <View style={styles.bodyContainer}>
-        {/* Aquí iría el contenido de la tabla */}
+        {(props.data) ?
+        (<FlatList
+          data={props.data}
+          renderItem={({item})=> <Item title={item.location + item.clock_in_ts + item.clock_out_ts}></Item> }
+          keyExtractor={item => item.id}/>)
+        : (<Text style={{color: 'white', textAlign: 'center'}}>No hay datos</Text>)}
       </View>
     </View>
   );
