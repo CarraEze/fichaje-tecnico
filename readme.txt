@@ -14,15 +14,19 @@ npx expo run:android --device
 npx expo install @supabase/supabase-js @react-native-async-storage/async-storage @rneui/themed react-native-url-polyfill
 
 PENDING:
-Login feature
 Show last checkins
 Show pending checkins
-Show and select locations
-Show current location
-notifications
-map query
-
-Styles
+Send current location
+Notifications
+Map query
+Styles 
 Backend
 
-Navigation CHECK
+CURRENT:
+Check in and out 
+Show and select locations
+Load locations in DB
+
+COMPLETED:
+Navigation (pendind to add map feature)
+SignIn and SignUp feature

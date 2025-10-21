@@ -15,7 +15,7 @@ import { supabase } from './lib/supabase'
 export default function App() {
   const [actualView, setActualView] = useState('LastClockOutsView');
   const [session, setSession] = useState(null)
-  const [clockInTS, setClockInTS] = useState(null);
+  const [clockInOBJ, setClockInOBJ] = useState(null);
   const [lastClockOuts, _setLastClockOuts] = useState([]);
 
   const setLastClockOuts = (newClockOut) => {
@@ -42,11 +42,11 @@ export default function App() {
   const views = {
     ActualClockIn: <ActualClockIn
       nav={goUltimas}
-      clockInTS={clockInTS}
-      //id_user={session.user.id} REVISAR ASINCRONISMO, ROMPE PORQUE SESSION ES NULL
+      clockInOBJ={clockInOBJ}
+      session={session}
       setLastClockOuts={setLastClockOuts} />,
     LastClockOutsView: <LastClockOuts nav={goNew} data={lastClockOuts}  />,
-    NewClockIn: <NewClockIn nav={goActual} setClockInTS={setClockInTS} />
+    NewClockIn: <NewClockIn nav={goActual} setClockInOBJ={setClockInOBJ} />
   };
 
   {

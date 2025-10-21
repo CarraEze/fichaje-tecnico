@@ -20,23 +20,33 @@ export const ActualClockIn = (props) => {  //componente que contiene la fichada 
   const [movil, setMovil] = useState('');
 
   const handleClose = () => {  //manejador para finalizar fichada
+    const { timestampz, location } = props.clockInOBJ;
     sendCI({
-      location: "pending",
+      location: location,
       geo_latitude: 1,
       geo_longitude: 1,
       id_user: props.session.user.id,
-      clock_in_ts: props.clockInTS,
+      clock_in_ts: timestampz,
       clock_out_ts: new Date(Date.now()).toISOString(),
       vehicle_id: movil
     });
     setModalVisible(false);
+    console.log({
+      location: location,
+      geo_latitude: 1,
+      geo_longitude: 1,
+      id_user: props.session.user.id,
+      clock_in_ts: timestampz,
+      clock_out_ts: new Date(Date.now()).toISOString(),
+      vehicle_id: movil
+    })
     props.nav();
   };
 
   return (
     <View style={globalStyles.view}>
       <Text style={globalStyles.textWhite}>Fichada en curso</Text>
-      <TextInput placeholer="Movil" onChangeText={setMovil} value={movil}></TextInput>
+      <TextInput style={globalStyles.textInput} placeholer="Movil" onChangeText={setMovil} value={movil}></TextInput>
       <NavigationPress text="Finalizar" onPress={() => setModalVisible(true)} />
       <Modal
         animationType="slide"

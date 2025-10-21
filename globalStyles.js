@@ -13,4 +13,11 @@ export const globalStyles = StyleSheet.create({
     textBlack: {
         color: '#000',
     },
+    textInput: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        color: 'white',
+        borderRadius: 5,
+    }
 });
